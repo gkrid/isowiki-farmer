@@ -1,0 +1,7 @@
+wikis_data: './wikis_data'
+docker_compose: './docker-compose.yml'
+apache_conf_tpl: './apache.conf.tpl'
+farmer_domain: 'localhost'
+ssl_include: ''
+ssl_certificate_file: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
+ssl_certificate_key_file: '/etc/ssl/private/ssl-cert-snakeoil.key'

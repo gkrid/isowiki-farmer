@@ -1,0 +1,8 @@
+core_engines/
+engine_config.local/
+.idea/
+venv
+__pycache__
+cmd_animal/__pycache__
+config.local.yml
+docker-compose.yml
