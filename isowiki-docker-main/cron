@@ -1,8 +1,0 @@
-#     ,------ MINUTE
-#    / ,----- HOUR
-#   / / ,---- DAY OF MONTH
-#  / / / ,--- MONTH
-# / / / / ,-- DAY OF WEEK
-#/ / / / /
-30 0 * * * /usr/local/bin/php -f /var/www/html/lib/plugins/bez/cron-daily.php >> /var/log/cron.log 2>&1
-#
