@@ -69,19 +69,19 @@ def create(name: str, apache_proxy: bool = True):
     # core_engines_conf = os.path.join(global_config['core_engines'], version, 'conf')
     # core_engines_data = os.path.join(global_config['core_engines'], version, 'data')
 
-    wikis_data = os.path.join(global_config['wikis_data'], doku_name)
-    wikis_data_conf = os.path.join(wikis_data, 'conf')
-    wikis_data_data = os.path.join(wikis_data, 'data')
-    if os.path.exists(wikis_data):
-        log.info(f'Data folder: {wikis_data} exists. New data files are not copied.')
-    else:
-        # https://github.com/gkrid/isowiki-docker/archive/main.tar.gz
-        os.system(f'wget -P /tmp https://github.com/gkrid/isowiki-docker/archive/main.tar.gz && tar -xzf /tmp/main.tar.gz')
-        copy_tree('/tmp/isowiki-docker-main/files/conf', wikis_data_conf)
-        copy_tree('/tmp/isowiki-docker-main/files/data', wikis_data_data)
-        # correct rights
-        os.system(f'sudo chown -R www-data:www-data {wikis_data_conf}')
-        os.system(f'sudo chown -R www-data:www-data {wikis_data_data}')
+    # wikis_data = os.path.join(global_config['wikis_data'], doku_name)
+    # wikis_data_conf = os.path.join(wikis_data, 'conf')
+    # wikis_data_data = os.path.join(wikis_data, 'data')
+    # if os.path.exists(wikis_data):
+    #     log.info(f'Data folder: {wikis_data} exists. New data files are not copied.')
+    # else:
+    #     # https://github.com/gkrid/isowiki-docker/archive/main.tar.gz
+    #     os.system(f'wget -P /tmp https://github.com/gkrid/isowiki-docker/archive/main.tar.gz && tar -xzf /tmp/main.tar.gz')
+    #     copy_tree('/tmp/isowiki-docker-main/files/conf', wikis_data_conf)
+    #     copy_tree('/tmp/isowiki-docker-main/files/data', wikis_data_data)
+    #     # correct rights
+    #     os.system(f'sudo chown -R www-data:www-data {wikis_data_conf}')
+    #     os.system(f'sudo chown -R www-data:www-data {wikis_data_data}')
 
     # engine_path = os.path.join(global_config['core_engines'], version)
     # volumes = []
@@ -91,9 +91,10 @@ def create(name: str, apache_proxy: bool = True):
 
     # volumes.append(f'{wikis_data_conf}:/var/www/html/conf:rw')
     # volumes.append(f'{wikis_data_data}:/var/www/html/data:rw')
+
+    wikis_data = os.path.join(global_config['wikis_data'], doku_name)
     volumes = [
-        f'{wikis_data_conf}:/var/www/html/conf:rw',
-        f'{wikis_data_data}:/var/www/html/data:rw',
+        f'{wikis_data}:/isowiki:rw',
     ]
 
 
@@ -125,4 +126,4 @@ def create(name: str, apache_proxy: bool = True):
         apache_conf_filepath = os.path.join('/etc/apache2/sites-available', apache_conf_filename)
         os.system(f'sudo mv /tmp/{apache_conf_filename} {apache_conf_filepath}')
         os.system(f'sudo a2ensite {apache_conf_filename}')
-        os.system(f'sudo systemctl reload apache2')
+        # os.system(f'sudo systemctl reload apache2')
