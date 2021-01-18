@@ -58,4 +58,3 @@ def remove(name: str, purge: bool = False, apache_proxy: bool = True):
         os.system(f'sudo a2dissite {apache_conf_filename}')
         apache_conf_filepath = os.path.join('/etc/apache2/sites-available', apache_conf_filename)
         os.system(f'sudo rm {apache_conf_filepath}')
-        # os.system(f'sudo systemctl reload apache2')

@@ -39,58 +39,8 @@ def create(name: str, apache_proxy: bool = True):
 
     # define new service
     services[doku_name] = {}
-    # ENGINE_PATH = os.path.join(global_config['core_engines'], version)
-    # services[doku_name]['build'] = {
-    #     'context': '.',
-    #     'args': {
-    #         'ENGINE_PATH': ENGINE_PATH
-    #     }
-    # }
-    # services[doku_name]['build'] = f'.'
-    # services[doku_name]['build'] = {
-    #     'context': '.',
-    #     'dockerfile': f'Dockerfile.{enviroment}'
-    # }
     services[doku_name]['image'] = 'gkrid/isowiki'
     services[doku_name]['container_name'] = doku_name
-    # services[doku_name]['environment'] = {}
-    # services[doku_name]['environment']['engine_version'] = version
-
-    # add labels
-    # labels = [
-    #     "traefik.enable=true",
-    #     "traefik.http.routers.{0}.rule=Host(`{0}.localhost`)".format(doku_name),
-    #     "traefik.http.routers.{0}.entrypoints=web".format(doku_name),
-    # ]
-    # services[doku_name]['labels'] = labels
-
-    # add volumes if not exists
-    # version = 'latest'
-    # core_engines_conf = os.path.join(global_config['core_engines'], version, 'conf')
-    # core_engines_data = os.path.join(global_config['core_engines'], version, 'data')
-
-    # wikis_data = os.path.join(global_config['wikis_data'], doku_name)
-    # wikis_data_conf = os.path.join(wikis_data, 'conf')
-    # wikis_data_data = os.path.join(wikis_data, 'data')
-    # if os.path.exists(wikis_data):
-    #     log.info(f'Data folder: {wikis_data} exists. New data files are not copied.')
-    # else:
-    #     # https://github.com/gkrid/isowiki-docker/archive/main.tar.gz
-    #     os.system(f'wget -P /tmp https://github.com/gkrid/isowiki-docker/archive/main.tar.gz && tar -xzf /tmp/main.tar.gz')
-    #     copy_tree('/tmp/isowiki-docker-main/files/conf', wikis_data_conf)
-    #     copy_tree('/tmp/isowiki-docker-main/files/data', wikis_data_data)
-    #     # correct rights
-    #     os.system(f'sudo chown -R www-data:www-data {wikis_data_conf}')
-    #     os.system(f'sudo chown -R www-data:www-data {wikis_data_data}')
-
-    # engine_path = os.path.join(global_config['core_engines'], version)
-    # volumes = []
-    # if enviroment == 'dev':
-    #     engine_path = os.path.join(global_config['core_engines'], version)
-    #     volumes.append(f'{engine_path}:/var/www/html:ro')
-
-    # volumes.append(f'{wikis_data_conf}:/var/www/html/conf:rw')
-    # volumes.append(f'{wikis_data_data}:/var/www/html/data:rw')
 
     wikis_data = os.path.join(global_config['wikis_data'], doku_name)
     volumes = [
@@ -126,4 +76,3 @@ def create(name: str, apache_proxy: bool = True):
         apache_conf_filepath = os.path.join('/etc/apache2/sites-available', apache_conf_filename)
         os.system(f'sudo mv /tmp/{apache_conf_filename} {apache_conf_filepath}')
         os.system(f'sudo a2ensite {apache_conf_filename}')
-        # os.system(f'sudo systemctl reload apache2')
